@@ -8,4 +8,6 @@ import java.util.List;
 
 @Repository
 public interface CargoVencimentoRepository extends JpaRepository<CargoVencimento, Integer> {
+
+    List<CargoVencimento> findByCargoId(Integer cargoId);
 }

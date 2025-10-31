@@ -1,0 +1,103 @@
+/* ====================================
+   LAYOUT BASE DA TELA DE REMUNERAÇÃO
+   ==================================== */
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #f4f6f8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* ==============================
+   CARD / CONTEÚDO CENTRAL
+   ============================== */
+.card {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 900px;
+}
+
+/* ==============================
+   AÇÕES / BOTÕES
+   ============================== */
+.actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+.actions h\:commandButton {
+    background: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.3s;
+}
+
+.actions h\:commandButton:hover {
+    background: #0056b3;
+}
+
+/* ==============================
+   TABELAS
+   ============================== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.tabela-container {
+    text-align: center;
+}
+
+th, td {
+    text-align: left;
+    padding: 10px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+th {
+    background-color: #f8f9fa;
+    font-weight: bold;
+}
+
+/* ==============================
+   MENSAGENS
+   ============================== */
+.empty-message-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 120px;
+    background-color: #fafafa;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    margin-top: 16px;
+}
+
+.empty-message {
+    padding: 1rem;
+    color: #777;
+    font-style: italic;
+}
+
+h\:messages {
+    margin-top: 1rem;
+    color: #d9534f;
+}
