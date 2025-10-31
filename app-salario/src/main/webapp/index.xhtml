@@ -8,9 +8,19 @@
 </h:head>
 
 <h:body>
+    <f:event type="preRenderView" listener="#{loginBean.verificarSessao}" />
+
     <div class="container">
         <h1>Bem-vindo ao App Salário</h1>
         <p>Gerencie remunerações de forma simples.</p>
+
+        <div class="actions">
+            <h:form>
+                <h:commandLink value="Acessar Remunerações"
+                               action="login.xhtml?faces-redirect=true"
+                               styleClass="btn-primary"/>
+            </h:form>
+        </div>
     </div>
 </h:body>
 </html>
