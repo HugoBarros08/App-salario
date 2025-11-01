@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @ServletComponentScan
 @SpringBootApplication
-public class Application {
+public class AppSalarioApplication {
     public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+        SpringApplication.run(AppSalarioApplication.class, args);
     }
 }
