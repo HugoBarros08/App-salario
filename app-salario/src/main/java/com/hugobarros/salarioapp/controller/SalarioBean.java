@@ -2,25 +2,24 @@ package com.hugobarros.salarioapp.controller;
 
 import com.hugobarros.salarioapp.dto.PessoaSalarioDTO;
 import com.hugobarros.salarioapp.service.SalarioService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;
-
+import jakarta.inject.Inject;
 import java.io.Serializable;
+import jakarta.inject.Named;
 import java.util.List;
 
-@Component("salarioBean")
+@Named("salarioBean")
 @ViewScoped
 public class SalarioBean implements Serializable {
 
-    @Autowired
+    @Inject
     private SalarioService salarioService;
-
     private List<PessoaSalarioDTO> lista;
+    private boolean processamentoConcluido = false;
 
     @PostConstruct
     public void init() {
@@ -28,9 +27,19 @@ public class SalarioBean implements Serializable {
     }
 
     public void recalcular() {
-        salarioService.recalcularSalarios();
-        lista = salarioService.listarConsolidado();
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Recalculado com sucesso", null));
+        processamentoConcluido = false;
+        salarioService.recalcularSalariosAsync(() -> processamentoConcluido = true);
+        FacesContext.getCurrentInstance()
+                .addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Cálculo iniciado em segundo plano", null));
+    }
+
+    public void verificarConclusao() {
+        if (processamentoConcluido) {
+            lista = salarioService.listarConsolidado();
+            FacesContext.getCurrentInstance()
+                    .addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Cálculo concluído e lista atualizada", null));
+            processamentoConcluido = false;
+        }
     }
 
     public List<PessoaSalarioDTO> getLista() {
