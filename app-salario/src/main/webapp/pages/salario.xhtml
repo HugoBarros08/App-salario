@@ -1,0 +1,50 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<f:metadata>
+    <f:viewAction action="#{salarioBean.init}" />
+</f:metadata>
+
+<h:head>
+    <title>Remuneração</title>
+    <link rel="stylesheet" href="#{request.contextPath}/css/style.css" />
+
+    <ui:include src="/WEB-INF/includes/header.xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"/>
+</h:head>
+
+<h:body>
+    <div class="card">
+        <h1>Remunerações</h1>
+
+        <h:messages id="msgs"/>
+
+        <div class="actions">
+            <h:form id="formRecalcular">
+                <h:commandButton
+                        value="#{empty salarioBean.lista ? 'Calcular salários' : 'Recalcular salários'}"
+                        action="#{salarioBean.recalcular}">
+                    <f:ajax render="@form :tabelaContainer :msgs" />
+                </h:commandButton>
+            </h:form>
+        </div>
+
+        <h:panelGroup id="tabelaContainer" layout="block" styleClass="tabela-container">
+            <h:panelGroup rendered="#{empty salarioBean.lista}">
+                <div class="empty-message-box">
+                    <span class="empty-message">Nenhum colaborador encontrado.</span>
+                </div>
+            </h:panelGroup>
+            <h:dataTable id="tabela"
+                         value="#{salarioBean.lista}"
+                         var="ps"
+                         rendered="#{not empty salarioBean.lista}"
+                         styleClass="table">
+                <h:column><f:facet name="header">Nome</f:facet>#{ps.nomePessoa}</h:column>
+                <h:column><f:facet name="header">Cargo</f:facet>#{ps.nomeCargo}</h:column>
+                <h:column><f:facet name="header">Salário</f:facet>R$ #{ps.salario}</h:column>
+            </h:dataTable>
+        </h:panelGroup>
+    </div>
+</h:body>
+</html>
